@@ -46,12 +46,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ChunkManager.cs" />
      <Compile Include="Assets\Movement.cs" />
+     <Compile Include="Assets\Scripts\BattleEngage.cs" />
      <Compile Include="Assets\Scripts\Camera\MoveCamera.cs" />
      <Compile Include="Assets\Scripts\Character\GameOver.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerLives.cs" />
-     <Compile Include="Assets\Scripts\Enviroment\ChunkManager.cs" />
      <Compile Include="Assets\Scripts\Intro\IntroDelay.cs" />
      <Compile Include="Assets\Scripts\UI Functions\LoadScene.cs" />
  <Reference Include="UnityEngine.UI">

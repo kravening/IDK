@@ -5,85 +5,69 @@ using System.Collections.Generic;
 public class ChunkManager : MonoBehaviour
 {
 	[Header("Chunk prefabs")]
-	public List<GameObject> m_chunks = new List<GameObject>();
+	public List<GameObject> chunks = new List<GameObject>();
 	
 	//screen width in game unit
-	private float m_screenWidthGameUnits;
+	private float screenWidthGameUnits;
 	private bool removed = false;
 	public float difficulty;
-	public float initialSpeed;
 	
-	private List<GameObject> m_chunkClones = new List<GameObject>();
+	private List<GameObject> chunkClones = new List<GameObject>();
 	
 	void Awake()
 	{
-		this.m_screenWidthGameUnits = this.getHalfScreenWidth();
+		this.screenWidthGameUnits = this.getHalfScreenWidth();
 	}
 	
 	void Start()
 	{
-		difficulty = initialSpeed;
+		difficulty = 1f;
 		for (int i = 0; i < 4; i++)
 		{
-			m_chunkClones.Add(getRandomChunk(Vector3.zero));
+			chunkClones.Add(getRandomChunk(Vector3.zero));
 		}
-		for (int j = 0; j < m_chunkClones.Count; j++)
+		for (int j = 0; j < chunkClones.Count; j++)
 		{
-			m_chunkClones[j].transform.position = new Vector3(j * getChunkWidth(m_chunkClones[j]),0);
+			chunkClones[j].transform.position = new Vector3(j * getChunkWidth(chunkClones[j]),0);
 		}
+		chunkClones[0].transform.position = new Vector3(0 - screenWidthGameUnits,0);
+		Vector3 eersteChunkPos = chunkClones[0].transform.position;
 		
-		m_chunkClones[0].transform.position = new Vector3(0 - m_screenWidthGameUnits,0);
-		
-		Vector3 eersteChunkPos = m_chunkClones[0].transform.position;
-		
-		for (int k = 0; k < m_chunkClones.Count; k++)
+		for (int k = 0; k < chunkClones.Count; k++)
 		{
-			m_chunkClones[k].transform.position = new Vector3(eersteChunkPos.x+getChunkWidth(m_chunkClones[k])*k,0);
+			chunkClones[k].transform.position = new Vector3(eersteChunkPos.x+getChunkWidth(chunkClones[k])*k,0);
 		}
-		
-		//maak alle chunks aan
-		//sorteer de nieuwe chunk zo dat ze het scherm volledig vullen
 	}
 	
 	void Update()
 	{
-		if (difficulty <= initialSpeed * 3) {
-			difficulty += initialSpeed / 100;
-		} else {
-			difficulty += initialSpeed / 10000; //10000
-		}
+		difficulty += 0.0001f;
 		if (removed) {
-			m_chunkClones.Add(getRandomChunk(Vector3.zero));
+			chunkClones.Add(getRandomChunk(Vector3.zero));
 			removed = false;
 		}
 		
-		sortChunks (m_chunkClones);
-		for (int i = (m_chunkClones.Count - 1); i > -1; i--) {
+		sortChunks (chunkClones);
+		for (int i = (chunkClones.Count - 1); i > -1; i--) {
 			//Debug.Log("ayy");
-			if(checkBoundsChunk(m_chunkClones[i])){
-				Destroy(m_chunkClones[i]);
-				m_chunkClones.RemoveAt(i);
+			if(checkBoundsChunk(chunkClones[i])){
+				Destroy(chunkClones[i]);
+				chunkClones.RemoveAt(i);
 				removed = true;
 			}
-			moveChunk(m_chunkClones[i], difficulty);
+			moveChunk(chunkClones[i], difficulty);
 		}
-		//check of alle chunks nog binne scherm zijn
-		//delete de chunks die buiten het scherm zijn
-		//beweeg alle chunks
 	}
 	
-	/// <summary>
-	/// Sorteer de chunk achter elkaar
-	/// </summary>
-	/// <param name="_chunks">List van chunks die gesorteerd moeten worden</param>
+	//Gets the chunks back to back
 	private void sortChunks(List<GameObject> _chunks)
 	{
 		if (_chunks.Count < 1)
 		{
-			Debug.Log("Error sort chunk! list heeft geen elementen");
+			Debug.Log("Error sort chunk! list does not have elements");
 			return;
 		}
-		var l_offset = m_screenWidthGameUnits;
+		var l_offset = screenWidthGameUnits;
 		//get first chunk position
 		var l_firstChunkV3 = _chunks[0].transform.position;
 		//sort chunks
@@ -93,14 +77,10 @@ public class ChunkManager : MonoBehaviour
 		}
 	}
 	
-	/// <summary>
-	/// Check of de chunk aan de linker kant uit het scherm is
-	/// </summary>
-	/// <param name="_chunk">chunk die we gaan checken</param>
-	/// <returns>True = uit scherm, False = binnen scherm</returns>
+	//Checks if chunk left the screen on the left side
 	private bool checkBoundsChunk(GameObject _chunk)
 	{
-		if (_chunk.transform.position.x < 0 - (m_screenWidthGameUnits + getChunkWidth(_chunk)))
+		if (_chunk.transform.position.x < 0 - (screenWidthGameUnits + getChunkWidth(_chunk)))
 		{
 			return true;
 		}
@@ -110,54 +90,33 @@ public class ChunkManager : MonoBehaviour
 		}
 	}
 	
-	/// <summary>
-	/// Beweeg een chunk
-	/// </summary>
-	/// <param name="_chunk">Chunk dat bewongen moet worden</param>
-	/// <param name="_speed">Snelheid van bewegen</param>
+	//Set movement speed and move chunk
 	private void moveChunk(GameObject _chunk, float _speed)
 	{
 		_chunk.transform.position -= new Vector3(_speed * Time.deltaTime, 0);
 	}
 	
-	/// <summary>
-	/// Haal een random chunk op
-	/// </summary>
-	/// <param name="_position">positie van game object</param>
-	/// <returns>chunk clone gameobject</returns>
+	//Get random chunk
 	private GameObject getRandomChunk(Vector3 _position)
 	{
-		return spawnChunk(m_chunks[Random.Range(0, m_chunks.Count)], _position);
+		return spawnChunk(chunks[Random.Range(0, chunks.Count)], _position);
 	}
 	
-	/// <summary>
-	/// Spawn een chunk
-	/// </summary>
-	/// <param name="_chunk">chunk game object</param>
-	/// <param name="_position">position van game object</param>
-	/// <returns>chunk clone</returns>
+	//Spawn and position a chunk
 	private GameObject spawnChunk(GameObject _chunk, Vector3 _position)
 	{
 		return (GameObject)Instantiate(_chunk, _position, Quaternion.identity);
 	}
 	
-	/// <summary>
-	/// Haal de breete op van de chunk
-	/// </summary>
-	/// <param name="_chunk">chunk game object</param>
-	/// <returns>breete in float</returns>
+	//Gets width of chunk
 	private float getChunkWidth(GameObject _chunk)
 	{
 		return _chunk.GetComponent<BoxCollider2D>().size.x;
 	}
 	
-	/// <summary>
-	/// Haal de helft van de schermbreete op in game units
-	/// </summary>
-	/// <returns>game with in game units</returns>
+	//Gets half of screen width in game units
 	private float getHalfScreenWidth()
 	{
-		//orthoWidth = orthographicSize / screenHeight * screenWidth;
 		return (Camera.main.orthographicSize / Camera.main.pixelHeight * Camera.main.pixelWidth);
 	}
 }

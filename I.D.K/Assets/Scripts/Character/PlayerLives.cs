@@ -12,6 +12,10 @@ public class PlayerLives : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (lives < 1) 
+		{
+			Destroy(this.gameObject);
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
@@ -31,10 +35,5 @@ public class PlayerLives : MonoBehaviour {
 	void DamageTaken(int damageTaken)
 	{
 		lives -= damageTaken;
-
-		if (lives <= 1) 
-		{
-			Destroy(this.gameObject);
-		}
 	}
 }

@@ -5,6 +5,11 @@ public class PlayerController : MonoBehaviour {
 
 	//Movement Related
 	public float speed;
+	public float jumpSpeed;
+	private float jumpCount;
+	private float maxJump = 2;
+	private float xPos;
+	private float yPos;
 	private bool moveRight = false;
 	private bool moveLeft = false;
 	private bool moveUp = false;
@@ -61,11 +66,24 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.S)) {
 			moveDown = false;
 		}
-
+		//Automatic Movement to the right
+		//Jump
+		if (jumpCount < maxJump) 
+		{
+			if (Input.GetKeyDown (KeyCode.Space)) 
+			{
+				//this.GetComponent<Rigidbody2D>().velocity = new Vector3 (0, jumpSpeed,0);
+				jumpCount++;
+			}
+		}
 	}
 
 	void OnCollisionEnter(Collision other)
 	{
-
+		if (other.transform.tag == "Ground") 
+		{
+			Debug.Log ("get rekt");
+			Destroy(this);
+		}
 	}
 }
