@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Bullet.cs" />
      <Compile Include="Assets\Movement.cs" />
+     <Compile Include="Assets\Remove.cs" />
      <Compile Include="Assets\Scripts\BattleEngage.cs" />
      <Compile Include="Assets\Scripts\Camera\MoveCamera.cs" />
      <Compile Include="Assets\Scripts\Character\GameOver.cs" />

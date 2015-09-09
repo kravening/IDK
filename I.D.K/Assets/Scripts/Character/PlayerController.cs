@@ -6,14 +6,19 @@ public class PlayerController : MonoBehaviour {
 	//Movement Related
 	public float speed;
 	public float jumpSpeed;
+	public int cooldownAmount = 60;
+	public GameObject bullet;
+	public ParticleSystemRenderer muzzleFlash;
+	public ParticleSystemRenderer explosion;
+	public Transform firePoint;
 	private float jumpCount;
 	private float maxJump = 2;
-	private float xPos;
-	private float yPos;
+	private int bulletCooldown;
 	private bool moveRight = false;
 	private bool moveLeft = false;
 	private bool moveUp = false;
 	private bool moveDown = false;
+	private bool shoot = false;
 
 	
 	// Use this for initialization
@@ -40,6 +45,14 @@ public class PlayerController : MonoBehaviour {
 		if (moveDown) {
 			transform.Translate(Vector2.down * speed * Time.deltaTime);
 		}
+		if (shoot) {
+			if (bulletCooldown >= cooldownAmount) {
+				SpawnBullet ();
+				bulletCooldown = 0;
+			}
+		}
+		bulletCooldown++;
+		
 
 		if (Input.GetKeyDown (KeyCode.D)) { //move right
 			moveRight = true;
@@ -52,6 +65,9 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.S)) { //move down
 			moveDown = true;
+		}
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			shoot = true;
 		}
 
 		if (Input.GetKeyUp (KeyCode.D)) {
@@ -66,16 +82,16 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.S)) {
 			moveDown = false;
 		}
-		//Automatic Movement to the right
-		//Jump
-		if (jumpCount < maxJump) 
-		{
-			if (Input.GetKeyDown (KeyCode.Space)) 
-			{
-				//this.GetComponent<Rigidbody2D>().velocity = new Vector3 (0, jumpSpeed,0);
-				jumpCount++;
-			}
+		if (Input.GetKeyUp (KeyCode.Space)) {
+			shoot = false;
 		}
+	}
+
+	void SpawnBullet(){
+		Debug.Log ("lekker knallen");
+		Instantiate (muzzleFlash, firePoint.position,Quaternion.Euler(0,0,0));
+		Instantiate (bullet,firePoint.position,transform.rotation);
+
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -83,6 +99,7 @@ public class PlayerController : MonoBehaviour {
 		if (other.transform.tag == "Ground") 
 		{
 			Debug.Log ("get rekt");
+			Instantiate (muzzleFlash, firePoint.position,Quaternion.Euler(0,0,0));
 			Destroy(this);
 		}
 	}

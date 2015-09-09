@@ -23,7 +23,7 @@ public class ChunkManager : MonoBehaviour
 	void Start()
 	{
 		difficulty = initialSpeed;
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			m_chunkClones.Add(getRandomChunk(Vector3.zero));
 		}
