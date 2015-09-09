@@ -12,27 +12,28 @@ public class PlayerLives : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-//		GameOver ();
+		if (lives < 1) 
+		{
+			Destroy(this.gameObject);
+		}
 	}
 
-	void OnCollisionEnter(Collision other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
+		if (other.transform.tag == "Ground") 
+		{
+			DamageTaken(3);
+			Debug.Log(lives);
+		}
 		if (other.transform.tag == "Enemy") 
 		{
-			lives = lives-1;
+			DamageTaken(1);
 			Debug.Log(lives);
 		}
 	}
 
-/*	IEnumerator GameOver()
+	void DamageTaken(int damageTaken)
 	{
-		if (lives < 1) 
-		{
-			//add a dying animation
-
-			//Load Gameover screen
-			//yield return new WaitForSeconds(2);
-			Application.LoadLevel("Game_Over");
-		}
-	}*/
+		lives -= damageTaken;
+	}
 }
