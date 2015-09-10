@@ -5,19 +5,12 @@ public class PlayerController : MonoBehaviour {
 
 	//Movement Related
 	public float speed;
-	public float jumpSpeed;
 	public int cooldownAmount = 60;
 	public GameObject bullet;
 	public ParticleSystemRenderer muzzleFlash;
 	public ParticleSystemRenderer explosion;
 	public Transform firePoint;
-	private float jumpCount;
-	private float maxJump = 2;
 	private int bulletCooldown;
-	private bool moveRight = false;
-	private bool moveLeft = false;
-	private bool moveUp = false;
-	private bool moveDown = false;
 	private bool shoot = false;
 
 	
@@ -33,19 +26,24 @@ public class PlayerController : MonoBehaviour {
 
 	void Movement()
 	{
-		if (moveLeft) {
+        if (Input.GetKey(KeyCode.A))//Move Left
+        {
 			transform.Translate(Vector2.left * speed * Time.deltaTime);
 		}
-		if (moveRight) {
+        if (Input.GetKey(KeyCode.D))//Move Right
+        {
 			transform.Translate(Vector2.right * speed * Time.deltaTime);
 		}
-		if (moveUp) {
+        if (Input.GetKey(KeyCode.W))//Move Up
+        {
 			transform.Translate(Vector2.up * speed * Time.deltaTime);
 		}
-		if (moveDown) {
+        if (Input.GetKey(KeyCode.S))//Move Down
+        {
 			transform.Translate(Vector2.down * speed * Time.deltaTime);
 		}
-		if (shoot) {
+		
+        if (shoot) {
 			if (bulletCooldown >= cooldownAmount) {
 				SpawnBullet ();
 				bulletCooldown = 0;
@@ -53,34 +51,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		bulletCooldown++;
 		
-
-		if (Input.GetKeyDown (KeyCode.D)) { //move right
-			moveRight = true;
-		}
-		if (Input.GetKeyDown (KeyCode.A)) { //move left
-			moveLeft = true;
-		}
-		if (Input.GetKeyDown (KeyCode.W)) { //move up
-			moveUp = true;
-		}
-		if (Input.GetKeyDown (KeyCode.S)) { //move down
-			moveDown = true;
-		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			shoot = true;
-		}
-
-		if (Input.GetKeyUp (KeyCode.D)) {
-			moveRight = false;
-		}
-		if (Input.GetKeyUp (KeyCode.A)) {
-			moveLeft = false;
-		}
-		if (Input.GetKeyUp (KeyCode.W)) {
-			moveUp = false;
-		}
-		if (Input.GetKeyUp (KeyCode.S)) {
-			moveDown = false;
 		}
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			shoot = false;
