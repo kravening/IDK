@@ -22,4 +22,10 @@ public class Bullet : MonoBehaviour {
 			lifeSpan--;
 		}
 	}
+
+	void OnCollisionEnter2D(Collision2D other){
+		if (other.transform.tag == "BulletStopper") {
+			Destroy (this.gameObject);
+		}
+	}
 }

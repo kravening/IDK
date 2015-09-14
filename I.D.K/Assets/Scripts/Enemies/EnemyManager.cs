@@ -27,33 +27,7 @@ public class EnemyManager : MonoBehaviour {
     { 
         transform.Translate(Vector2.left * enemySpeed * Time.deltaTime); 
     }
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.transform.tag == "Player")
-        {
-            Destroy(this.gameObject);
-        }
-        if (other.transform.tag == "Bullet")
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
-/*    void SpawnEnemy()
-    {
-        if(counter >= cooldownSpawner){
-          //SpawnCooldown();
-             Debug.Log("Spawned enemy");
-            Instantiate(,enemySpawner.position,Quaternion.Euler(0,0,0));
-            counter= 0;
-
-        }else{
-            counter++;
-        }
-        
-    }
-*/
+	 
     private GameObject getRandomEnemySet(Vector3 _position)
     {
         return spawnEnemySet(enemySet[Random.Range(0, enemySet.Count)], _position);
@@ -71,7 +45,7 @@ public class EnemyManager : MonoBehaviour {
          {
             counter++;
          }
-        
+		return _enemy;
     }
 
     IEnumerator SpawnCooldown()

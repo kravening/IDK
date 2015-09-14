@@ -66,13 +66,13 @@ public class PlayerController : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter(Collision other)
+	void OnCollisionEnter2D(Collision2D other)
 	{
 		if (other.transform.tag == "Ground") 
 		{
 			Debug.Log ("get rekt");
-			Instantiate (muzzleFlash, firePoint.position,Quaternion.Euler(0,0,0));
-			Destroy(this);
+			Instantiate (explosion, firePoint.position,Quaternion.Euler(0,0,0));
+			Destroy(this.gameObject);
 		}
 	}
 }
