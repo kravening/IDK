@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour {
     private float xMin = 10;
     private float xMax = 20;
     private float yMin = 0;
-    private float yMax = 3;
+    private float yMax = 1;
 
     private float spawnCooldown = 4;
     private float timeUntilSpawn = 4;
