@@ -32,11 +32,11 @@ public class EnemyPrefabSpawner : MonoBehaviour {
 		
 		chunkClones[0].transform.position = new Vector3(0 + screenWidthGameUnits * 2 ,0);
 		
-		Vector3 eersteChunkPos = chunkClones[0].transform.position;
+		Vector3 firstChunkPos = chunkClones[0].transform.position;
 		
 		for (int k = 0; k < chunkClones.Count; k++)
 		{
-			chunkClones[k].transform.position = new Vector3(eersteChunkPos.x+getChunkWidth(chunkClones[k])*k,0);
+			chunkClones[k].transform.position = new Vector3(firstChunkPos.x+getChunkWidth(chunkClones[k])*k,0);
 		}
 	}
 	
@@ -77,12 +77,18 @@ public class EnemyPrefabSpawner : MonoBehaviour {
 			_chunks[i].transform.position = new Vector3(l_firstChunkV3.x + (getChunkWidth(_chunks[i]) * i), 0);
 		}
 	}
+
+    private void moveChunk(GameObject _chunk, float _speed)
+    {
+        _chunk.transform.position -= new Vector3(_speed * Time.deltaTime, 0);
+    }
 	
 	//Checks if chunk left the screen on the left side
 	private bool checkBoundsChunk(GameObject _chunk)
 	{
 		if (_chunk.transform.position.x < 0 - (screenWidthGameUnits + getChunkWidth(_chunk)))
 		{
+            Debug.Log("Left");
 			return true;
 		}
 		else

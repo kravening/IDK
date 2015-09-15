@@ -17,13 +17,18 @@ public class PlayerLives : MonoBehaviour {
 			DamageTaken(3);
 			Debug.Log(lives);
 		}
-		if (other.transform.tag == "Enemy") 
-		{
-			DamageTaken(1);
-			Debug.Log(lives);
-		}
+		
 	}
 
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.transform.tag == "Enemy")
+        {
+            Destroy(coll.gameObject);
+            DamageTaken(1);
+            Debug.Log(lives);
+        }    
+    }
 	void DamageTaken(int damageTaken)
 	{
 		lives -= damageTaken;

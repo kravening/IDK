@@ -10,11 +10,12 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		transform.Translate(Vector2.left * Time.deltaTime * 2);
 	}
 	void OnCollisionEnter2D(Collision2D other){
-
-		Destroy (this.gameObject);
-
+        if (other.transform.tag == "Player")
+        {
+            Destroy(this.gameObject);
+        }
 	}
 }
