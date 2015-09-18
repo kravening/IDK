@@ -4,12 +4,8 @@ using System.Collections;
 public class EnemyController : MonoBehaviour {
 
     private float _speed = 3.5f;
-<<<<<<< HEAD
     public int enemyHealth;
-=======
     private ScoreManager _scoreManager;
-	public int enemyHealth = 3;
->>>>>>> origin/master
 
 	// Use this for initialization
 	void Start () {
