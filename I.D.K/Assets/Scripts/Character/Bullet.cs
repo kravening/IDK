@@ -3,15 +3,16 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed;
+    private float speed;
     public float acceleration;
     public int lifeSpan;
 
-
+    private ScoreManager _scoreManager;
+	
     // Use this for initialization
     void Start()
     {
-
+        _scoreManager = GameObject.Find("ScoreText").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -33,6 +34,7 @@ public class Bullet : MonoBehaviour
     {
         if(coll.gameObject.tag == "Enemy")
         {
+            _scoreManager.AddScore(50);
             print("colliding");
             Destroy(coll.gameObject);
             Destroy(this.gameObject);

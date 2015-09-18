@@ -3,8 +3,8 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour {
 
-    private float xMin = 10;
-    private float xMax = 20;
+    private float xMin = 13;
+    private float xMax = 17;
     private float yMin = 0;
     private float yMax = 1;
 
@@ -37,6 +37,6 @@ public class EnemySpawner : MonoBehaviour {
         GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
 	
         Vector3 newPos = new Vector3(Random.Range(xMin, xMax), Random.Range(yMin, yMax), 0);
-        GameObject octo = Instantiate(enemyPrefab, newPos, Quaternion.identity) as GameObject;
+        GameObject enemySet = Instantiate(enemyPrefab, newPos, Quaternion.identity) as GameObject;
     }
 }
