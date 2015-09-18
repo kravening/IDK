@@ -5,6 +5,8 @@ public class EnemyController : MonoBehaviour {
 
     private float _speed = 3.5f;
     private ScoreManager _scoreManager;
+	public int enemyHealth = 3;
+
 	// Use this for initialization
 	void Start () {
         _scoreManager = GameObject.Find("ScoreText").GetComponent<ScoreManager>();
