@@ -55,7 +55,8 @@
      <Compile Include="Assets\Scripts\Enemies\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\Enviroment\ChunkManager.cs" />
      <Compile Include="Assets\Scripts\Intro\IntroDelay.cs" />
-     <Compile Include="Assets\Scripts\UI Functions\LoadScene.cs" />
+     <Compile Include="Assets\Scripts\LevelChangers\GameOverScene.cs" />
+     <Compile Include="Assets\Scripts\LevelChangers\LoadScene.cs" />
      <Compile Include="Assets\Scripts\UI Functions\ScoreManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

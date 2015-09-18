@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public int cooldownAmount = 60;
 	public GameObject bullet;
 	public ParticleSystemRenderer muzzleFlash;
+	public ParticleSystemRenderer bulletSmoke;
 	public Transform firePoint;
 	private int bulletCooldown;
 	private bool shoot = false;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 
 	void SpawnBullet(){
 		Instantiate (muzzleFlash, firePoint.position,Quaternion.Euler(0,0,0));
+		Instantiate (bulletSmoke, firePoint.position,Quaternion.Euler(0,-90,0));
 		Instantiate (bullet,firePoint.position,transform.rotation);
 
 	}

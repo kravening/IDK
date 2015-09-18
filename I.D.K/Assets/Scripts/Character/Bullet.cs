@@ -34,9 +34,15 @@ public class Bullet : MonoBehaviour
     {
         if(coll.gameObject.tag == "Enemy")
         {
-            _scoreManager.AddScore(50);
-            print("colliding");
-            Destroy(coll.gameObject);
+			int eHealth = coll.gameObject.GetComponent<EnemyController>().enemyHealth;
+
+			if(eHealth <= 1){
+				Destroy (coll.gameObject);
+				_scoreManager.AddScore(50);
+			}else{
+				coll.gameObject.GetComponent<EnemyController>().enemyHealth -= 1;
+			}
+
             Destroy(this.gameObject);
         }
         if (coll.transform.tag == "BulletStopper")

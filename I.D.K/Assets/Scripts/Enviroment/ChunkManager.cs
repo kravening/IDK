@@ -8,8 +8,8 @@ public class ChunkManager : MonoBehaviour
 	public List<GameObject> chunks = new List<GameObject>();
 	
 	//screen width in game unit
-	private float screenWidthGameUnits;
-	private bool removed = false;
+	private float _screenWidthGameUnits;
+	private bool _removed = false;
 	public float difficulty;
 	public float initialSpeed;
 	
@@ -17,7 +17,7 @@ public class ChunkManager : MonoBehaviour
 	
 	void Awake()
 	{
-		this.screenWidthGameUnits = this.getHalfScreenWidth();
+		this._screenWidthGameUnits = this.getHalfScreenWidth();
 	}
 	
 	void Start()
@@ -32,7 +32,7 @@ public class ChunkManager : MonoBehaviour
 			chunkClones[j].transform.position = new Vector3(j * getChunkWidth(chunkClones[j]),0);
 		}
 		
-		chunkClones[0].transform.position = new Vector3(0 - screenWidthGameUnits,0);
+		chunkClones[0].transform.position = new Vector3(0 - _screenWidthGameUnits,0);
 		
 		Vector3 eersteChunkPos = chunkClones[0].transform.position;
 		
@@ -49,9 +49,9 @@ public class ChunkManager : MonoBehaviour
 		} else {
 			difficulty += initialSpeed / 10000;
 		}
-		if (removed) {
+		if (_removed) {
 			chunkClones.Add(getRandomChunk(Vector3.zero));
-			removed = false;
+			_removed = false;
 		}
 		
 		sortChunks (chunkClones);
@@ -60,7 +60,7 @@ public class ChunkManager : MonoBehaviour
 			if(checkBoundsChunk(chunkClones[i])){
 				Destroy(chunkClones[i]);
 				chunkClones.RemoveAt(i);
-				removed = true;
+				_removed = true;
 			}
 			moveChunk(chunkClones[i], difficulty);
 		}
@@ -71,11 +71,10 @@ public class ChunkManager : MonoBehaviour
 	{
 		if (_chunks.Count < 1)
 		{
-			Debug.Log("Error sort chunk! list heeft geen elementen");
 			return;
 		}
-		var l_offset = screenWidthGameUnits;
-		//get first chunk position
+		
+        //get first chunk position
 		var l_firstChunkV3 = _chunks[0].transform.position;
 		//sort chunks
 		for (int i = 0; i < _chunks.Count; i++)
@@ -87,7 +86,7 @@ public class ChunkManager : MonoBehaviour
 	//Checks if chunk left the screen on the left side
 	private bool checkBoundsChunk(GameObject _chunk)
 	{
-		if (_chunk.transform.position.x < 0 - (screenWidthGameUnits + getChunkWidth(_chunk)))
+		if (_chunk.transform.position.x < 0 - (_screenWidthGameUnits + getChunkWidth(_chunk)))
 		{
 			return true;
 		}
