@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
     private float speed;
     public float acceleration;
     public int lifeSpan;
+	public ParticleSystemRenderer impact;
+	public ParticleSystemRenderer enemyExplodes;
 
     private ScoreManager _scoreManager;
 	
@@ -38,11 +40,12 @@ public class Bullet : MonoBehaviour
 
 			if(eHealth <= 1){
 				Destroy (coll.gameObject);
+				Instantiate (enemyExplodes, coll.gameObject.transform.position,Quaternion.Euler(0,0,0));
 				_scoreManager.AddScore(50);
 			}else{
 				coll.gameObject.GetComponent<EnemyController>().enemyHealth -= 1;
 			}
-
+			Instantiate (impact, this.gameObject.transform.position,Quaternion.Euler(0,0,0));
             Destroy(this.gameObject);
         }
         if (coll.transform.tag == "BulletStopper")

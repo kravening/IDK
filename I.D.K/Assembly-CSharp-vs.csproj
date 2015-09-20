@@ -46,8 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Remove.cs" />
      <Compile Include="Assets\Scripts\Character\Bullet.cs" />
+     <Compile Include="Assets\Scripts\Character\BulletContainer.cs" />
      <Compile Include="Assets\Scripts\Character\GameOver.cs" />
      <Compile Include="Assets\Scripts\Character\Movement.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
@@ -56,8 +56,11 @@
      <Compile Include="Assets\Scripts\Enemies\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\Enviroment\ChunkManager.cs" />
      <Compile Include="Assets\Scripts\Intro\IntroDelay.cs" />
-     <Compile Include="Assets\Scripts\UI Functions\LoadScene.cs" />
+     <Compile Include="Assets\Scripts\LevelChangers\GameOverScene.cs" />
+     <Compile Include="Assets\Scripts\LevelChangers\LoadScene.cs" />
      <Compile Include="Assets\Scripts\UI Functions\ScoreManager.cs" />
+     <Compile Include="Assets\Scripts\Utility\Remove.cs" />
+     <Compile Include="Assets\Scripts\Utility\RemoveOnCollision.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
