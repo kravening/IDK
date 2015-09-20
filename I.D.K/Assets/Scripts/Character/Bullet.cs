@@ -25,25 +25,28 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.gameObject.tag == "Enemy")
-        {
-			int eHealth = coll.gameObject.GetComponent<EnemyController>().enemyHealth;
+		if (this.gameObject != null) {
+			if (coll.gameObject.tag == "Enemy") {
+				if (coll.gameObject != null) {
 
-			if(eHealth <= 1){
-				Instantiate(enemyExplodes,coll.transform.position,Quaternion.Euler(0,0,0));
-				Destroy (coll.gameObject);
-				_scoreManager.AddScore(50);
-			}else{
-				coll.gameObject.GetComponent<EnemyController>().enemyHealth -= 1;
+					int eHealth = coll.gameObject.GetComponent<EnemyController> ().enemyHealth;
+
+					if (eHealth <= 1) {
+						Instantiate (enemyExplodes, coll.transform.position, Quaternion.Euler (0, 0, 0));
+						Destroy (coll.gameObject);
+						_scoreManager.AddScore (50);
+					} else {
+						coll.gameObject.GetComponent<EnemyController> ().enemyHealth -= 1;
+					}
+					Instantiate (impact, this.gameObject.transform.position, Quaternion.Euler (0, 0, 0));
+					Destroy (this.gameObject);
+				}
 			}
-			Instantiate (impact, this.gameObject.transform.position,Quaternion.Euler(0,0,0));
-            Destroy(this.gameObject);
-        }
-        if (coll.transform.tag == "BulletStopper")
-        {
-            Debug.Log("Stopper");
-            Destroy(this.gameObject);
-        }
+			if (coll.transform.tag == "BulletStopper") {
+				Debug.Log ("Stopper");
+				Destroy (this.gameObject);
+			}
+		}
     }
 
 }
