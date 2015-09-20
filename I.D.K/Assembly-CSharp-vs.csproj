@@ -46,12 +46,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\RandomPos.cs" />
      <Compile Include="Assets\Scripts\Character\Bullet.cs" />
      <Compile Include="Assets\Scripts\Character\BulletContainer.cs" />
      <Compile Include="Assets\Scripts\Character\GameOver.cs" />
      <Compile Include="Assets\Scripts\Character\Movement.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerLives.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyController.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\Enviroment\ChunkManager.cs" />

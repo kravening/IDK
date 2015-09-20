@@ -5,7 +5,6 @@ public class Bullet : MonoBehaviour
 {
     private float speed;
     public float acceleration;
-    public int lifeSpan;
 	public ParticleSystemRenderer impact;
 	public ParticleSystemRenderer enemyExplodes;
 
@@ -22,14 +21,6 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(Vector2.right * Time.deltaTime * speed);
         speed += acceleration;
-        if (lifeSpan < 0)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            lifeSpan--;
-        }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -39,8 +30,8 @@ public class Bullet : MonoBehaviour
 			int eHealth = coll.gameObject.GetComponent<EnemyController>().enemyHealth;
 
 			if(eHealth <= 1){
+				Instantiate(enemyExplodes,coll.transform.position,Quaternion.Euler(0,0,0));
 				Destroy (coll.gameObject);
-				Instantiate (enemyExplodes, coll.gameObject.transform.position,Quaternion.Euler(0,0,0));
 				_scoreManager.AddScore(50);
 			}else{
 				coll.gameObject.GetComponent<EnemyController>().enemyHealth -= 1;
