@@ -27,8 +27,10 @@ public class EnemyController : MonoBehaviour {
 	public bool shootOn = true;
 
 	void Start () {
-        enemyHealth = 2;
 		_cameraWidth = Camera.main.orthographicSize / Camera.main.pixelHeight * Camera.main.pixelWidth;
+		if (shootOn == false) {
+			_diveAcceleration = .60f;
+		}
     }
 	
 	void Update () {
@@ -89,14 +91,12 @@ public class EnemyController : MonoBehaviour {
 			
 		float zAngle = Mathf.Atan2 (_direction.y, _direction.x) * Mathf.Rad2Deg; //change this if the enemy doesn't look left on spawn.
 		transform.rotation = Quaternion.Euler (0, 0, zAngle);
-		Debug.Log (zAngle);
 	}
 
 	void Kamikaze(){ //if countdown is 0 dive onto player position
 		_countdownTimer--;
 		if (_countdownTimer <= 0) {
 			if(_snapshotPosition == false){
-				//_playerPatrols = false; //if you gon kamikaze stop patroling
 				GetPos(_player, "Player");
 				_snapshotPosition = true;
 			}

@@ -1,13 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Character\Bullet.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Utility\Remove.cs">
     <Files>
-      <File FileName="Assets\Scripts\Character\Bullet.cs" Line="49" Column="4" />
-      <File FileName="Assets\Scripts\Enemies\EnemyController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Character\Bullet.cs" Line="34" Column="29" />
       <File FileName="Assets\Scripts\Character\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Enemies\EnemyBullet.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Enemies\EnemyBullet.cs" Line="14" Column="1" />
       <File FileName="Assets\Scripts\Utility\Remove.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Enemies\EnemySpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Enemies\EnemyController.cs" Line="99" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
