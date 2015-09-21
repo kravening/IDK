@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class PlayerLives : MonoBehaviour {
-	public float lives;
-	private float maxLives = 3;
+	public int lives;
+	private int maxLives = 3;
     public ParticleSystemRenderer explosion;
     public Transform firePoint;
 	
