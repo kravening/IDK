@@ -43,7 +43,6 @@ public class Bullet : MonoBehaviour
 				}
 			}
 			if (coll.transform.tag == "BulletStopper") {
-				Debug.Log ("Stopper");
 				Destroy (this.gameObject);
 			}
 		}
