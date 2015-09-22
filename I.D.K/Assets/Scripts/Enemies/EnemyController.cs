@@ -30,7 +30,7 @@ public class EnemyController : MonoBehaviour {
 		if (shootOn == false) {
 			_diveAcceleration = .60f;
 		}
-		enemyHealth = 2;
+		enemyHealth = 1;
 		_scoreManager = GameObject.Find ("ScoreText").GetComponent<ScoreManager> ();
 		_scoreManager.AddScore (5);
     }

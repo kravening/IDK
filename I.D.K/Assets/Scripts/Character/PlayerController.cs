@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class PlayerController : MonoBehaviour {
 
@@ -11,6 +12,12 @@ public class PlayerController : MonoBehaviour {
 	public Transform firePoint;
 	private int bulletCooldown;
 	private bool shoot = false;
+	private AudioSource audio;
+	public AudioClip shootAudio;
+
+	void Start(){
+		audio = GetComponent<AudioSource>();
+	}
 
 		// Update is called once per frame
 	void Update () {
@@ -53,6 +60,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void SpawnBullet(){
+		audio.clip = shootAudio;
+		audio.Play ();
 		Instantiate (muzzleFlash, firePoint.position,Quaternion.Euler(0,0,0));
 		Instantiate (bulletSmoke, firePoint.position,Quaternion.Euler(0,-90,0));
 		Instantiate (bullet,firePoint.position,transform.rotation);

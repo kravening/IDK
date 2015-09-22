@@ -25,6 +25,8 @@ public class Bullet : MonoBehaviour
 		if (coll.gameObject.tag == "Enemy") {
 			coll.gameObject.GetComponent<EnemyController> ().DestroyEnemy();
 			Destroy (this.gameObject);
+		}else if (coll.gameObject.tag == "EnemyBullet") {
+			Destroy(coll.gameObject);
 		}
 
 		if (coll.transform.tag == "BulletStopper") {

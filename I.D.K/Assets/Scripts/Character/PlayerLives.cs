@@ -6,11 +6,13 @@ public class PlayerLives : MonoBehaviour {
 	private int maxLives = 3;
     public ParticleSystemRenderer explosion;
     public Transform firePoint;
+	private AudioSource audio;
+	public AudioClip explosionAudio;
 	
    // Use this for initialization
 	void Start () {
 		lives = maxLives;
-        Debug.Log(lives);
+		audio = GetComponent<AudioSource>();
 	}
 
     void Update()
@@ -25,8 +27,7 @@ public class PlayerLives : MonoBehaviour {
 	{
 		if (other.transform.tag == "Ground") 
 		{
-			DamageTaken(3);
-			Debug.Log(lives);
+			DamageTaken(99);
 		}
         GameOver();
 		
@@ -52,6 +53,8 @@ public class PlayerLives : MonoBehaviour {
     {
         if (lives < 1)
         {
+			audio.clip = explosionAudio;
+			audio.Play();
             Instantiate(explosion, firePoint.position, Quaternion.Euler(0, 0, 0));
             Destroy(this.gameObject);
             Time.timeScale = 0.2f;
