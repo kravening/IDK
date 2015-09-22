@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\LevelChangers\LoadScene.cs" />
      <Compile Include="Assets\Scripts\UI Functions\ScoreManager.cs" />
      <Compile Include="Assets\Scripts\Utility\Remove.cs" />
+     <Compile Include="Assets\timescaleHotfix.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class EnemyController : MonoBehaviour {
@@ -32,6 +32,7 @@ public class EnemyController : MonoBehaviour {
 		}
 		enemyHealth = 2;
 		_scoreManager = GameObject.Find ("ScoreText").GetComponent<ScoreManager> ();
+		_scoreManager.AddScore (5);
     }
 	
 	void Update () {
@@ -42,6 +43,7 @@ public class EnemyController : MonoBehaviour {
 	void OutOfBoundCheck(){
 		if (this.gameObject.transform.position.x < 0 - _cameraWidth)
 		{
+			_scoreManager.AddScore (10);
 			Destroy(this.gameObject);
 		}
 	}
