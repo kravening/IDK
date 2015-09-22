@@ -3,21 +3,20 @@ using System.Collections;
 
 public class EnemyController : MonoBehaviour {
 
-   public ParticleSystemRenderer muzzleFlash;
+	public ParticleSystemRenderer muzzleFlash;
 	public ParticleSystemRenderer bulletSmoke;
+	public ParticleSystemRenderer enemyExplodes;
 	public GameObject bullet;
 	public Transform firePoint;
 
-    public int enemyHealth;
+    private int enemyHealth;
 	private int _countdownTimer = 100;
     private ScoreManager _scoreManager;
 	private bool _isInStartPos = false;
-	private bool _startCountdown = false;
 	private bool _snapshotPosition = false;
 	private Transform _randomPos;
 	private Transform _player;
 	private Transform _rotateToThis;
-	private float _rotSpeed = 90;
 	private Vector3 _direction;
 	private float _diveSpeed = 0;
 	private float _diveAcceleration = .30f;
@@ -31,6 +30,8 @@ public class EnemyController : MonoBehaviour {
 		if (shootOn == false) {
 			_diveAcceleration = .60f;
 		}
+		enemyHealth = 2;
+		_scoreManager = GameObject.Find ("ScoreText").GetComponent<ScoreManager> ();
     }
 	
 	void Update () {
@@ -110,5 +111,15 @@ public class EnemyController : MonoBehaviour {
 		Instantiate (bulletSmoke, firePoint.position,Quaternion.Euler(0,-90,-180));
 		Instantiate (bullet,firePoint.position,Quaternion.Euler(0,0,-180));
 		
+	}
+
+	public void DestroyEnemy(){
+		if (enemyHealth <= 0) {
+			_scoreManager.AddScore (50);
+			Instantiate (enemyExplodes, this.gameObject.transform.position, Quaternion.Euler (0, 0, 0));
+			Destroy (this.gameObject);
+		} else {
+			enemyHealth--;
+		}
 	}
 }
